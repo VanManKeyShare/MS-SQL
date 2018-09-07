@@ -1,0 +1,10 @@
+
+MS SQL - PHÂN TRANG TRONG SELECT
+
+select *
+from (
+	select top 100 percent *, ROW_NUMBER() over (order by nam_sp desc, thang_sp desc, ngay_sp desc, id_sp desc) as RowNum
+	from san_pham
+	order by nam_sp desc, thang_sp desc, ngay_sp desc, id_sp desc
+) as san_pham_ok
+where san_pham_ok.RowNum between (((2-1)*5)+1) and (5*2)
